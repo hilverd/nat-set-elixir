@@ -51,23 +51,22 @@ storing natural numbers.
 test "compare efficiency of MapSets and NatSets" do
   max = 100_000
 
-  {time_in_ms, map_set} = :timer.tc(fn -> Enum.into(1..max, MapSet.new) end)
-  IO.puts("Creating a MapSet of #{max} elements took #{time_in_ms} milliseconds.")
-  IO.puts("The resulting MapSet is #{map_set |> size_in_kb} kb in size.")
+  {mus, map_set} = :timer.tc(fn -> Enum.into(1..max, MapSet.new) end)
+  IO.puts("MapSet took #{mus |> secs} seconds and is #{map_set |> size_in_kb} kb")
 
-  {time_in_ms, nat_set} = :timer.tc(fn -> Enum.into(1..max, NatSet.new) end)
-  IO.puts("Creating a NatSet of #{max} elements took #{time_in_ms} milliseconds.")
-  IO.puts("The resulting NatSet is #{nat_set |> size_in_kb} kb in size.")
+  {mus, nat_set} = :timer.tc(fn -> Enum.into(1..max, NatSet.new) end)
+  IO.puts("NatSet took #{mus |> secs} seconds and is #{nat_set |> size_in_kb} kb")
 end
 
-defp size_in_kb(term), do: :erts_debug.size(term) * :erlang.system_info(:wordsize) / 1024
+defp size_in_kb(term), do: :erts_debug.size(term) * :erlang.system_info(:wordsize) / 1024.0
+defp secs(mus), do: mus / 1_000_000
 ```
 
 This produced the following on my machine:
 
 ```
-MapSet took 62728 milliseconds and is 2947.375 kb
-NatSet took 40315 milliseconds and is 26.7890625 kb
+MapSet took 0.06468 seconds and is 2947.375 kb
+NatSet took 0.043118 seconds and is 26.7890625 kb
 ```
 
 ### Results

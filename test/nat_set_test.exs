@@ -7,14 +7,15 @@ defmodule NatSetTest do
   test "compare efficiency of MapSets and NatSets" do
     max = 1_000
 
-    {time_in_ms, map_set} = :timer.tc(fn -> Enum.into(1..max, MapSet.new) end)
-    IO.puts("MapSet took #{time_in_ms} milliseconds and is #{map_set |> size_in_kb} kb")
+    {mus, map_set} = :timer.tc(fn -> Enum.into(1..max, MapSet.new) end)
+    IO.puts("MapSet took #{mus |> secs} seconds and is #{map_set |> size_in_kb} kb")
 
-    {time_in_ms, nat_set} = :timer.tc(fn -> Enum.into(1..max, NatSet.new) end)
-    IO.puts("NatSet took #{time_in_ms} milliseconds and is #{nat_set |> size_in_kb} kb")
+    {mus, nat_set} = :timer.tc(fn -> Enum.into(1..max, NatSet.new) end)
+    IO.puts("NatSet took #{mus |> secs} seconds and is #{nat_set |> size_in_kb} kb")
   end
 
   defp size_in_kb(term), do: :erts_debug.size(term) * :erlang.system_info(:wordsize) / 1024.0
+  defp secs(mus), do: mus / 1_000_000
 
   # The following tests are adapted from Elixir's map_set_test.exs
 
