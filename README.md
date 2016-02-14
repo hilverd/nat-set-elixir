@@ -44,8 +44,8 @@ See the [documentation](http://hexdocs.pm/nat_set) for more available functional
 
 ## Benchmarks
 
-The following test gives a rough idea of how NatSet's performance compares to that of the standard
-MapSet for storing natural numbers.
+The following test gives a rough idea of how NatSet's performance compares to that of MapSet for
+storing natural numbers.
 
 ``` elixir
 test "compare efficiency of MapSets and NatSets" do
@@ -72,7 +72,7 @@ NatSet took 40315 milliseconds and is 26.7890625 kb
 
 ### Results
 
-The results below are produced by [https://github.com/alco/benchfella](Benchfella) using the tests
+The results below are produced by [Benchfella](https://github.com/alco/benchfella) using the tests
 in
 [`nat_set_bench.exs`](https://github.com/hilverd/nat-set-elixir/blob/master/bench/nat_set_bench.exs).
 
