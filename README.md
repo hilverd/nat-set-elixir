@@ -5,8 +5,8 @@
 [![Hex.pm](https://img.shields.io/hexpm/dt/nat_set.svg?style=flat-square)](https://hex.pm/packages/nat_set)
 
 This is an Elixir library for working with sets of natural numbers (i.e. non-negative integers). It
-uses [bitwise operations](https://en.wikipedia.org/wiki/Bit_array) to represent such sets much more
-compactly than you would get when using standard MapSets.
+uses [bitsets](https://en.wikipedia.org/wiki/Bit_array) to represent such sets much more compactly
+than you would get when using standard MapSets.
 
 Documentation: http://hexdocs.pm/nat_set.
 
