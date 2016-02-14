@@ -1,0 +1,40 @@
+#! /bin/bash
+#
+# Usage: ./release VERSION
+#
+# where VERSION is e.g. "0.0.4".
+#
+# Bumps version number to VERSION and pushes to GitHub and Hex.pm.
+
+set -e
+
+VERSION="$1"
+
+if [ -z "$VERSION" ]; then
+  echo >&2 "No version provided"
+  exit 1
+fi
+
+sed -i 's/@version "[^"]*/@version "'"$VERSION"'/' mix.exs
+sed -i 's/:nat_set, "~> [^"]*/:nat_set, "~> '"$VERSION"'/' README.md
+
+mix deps.get
+mix deps.compile
+mix test
+
+git diff
+
+echo -n 'OK? [y/N] '
+read reply
+if [ "$reply" != y ]; then
+  echo >&2 "Aborted"
+  exit 1
+fi
+
+git commit -am "Bump version to $VERSION"
+git tag -a v"$VERSION" -m "Release v$VERSION"
+
+git push
+git push --tags
+mix hex.publish
+mix hex.docs
