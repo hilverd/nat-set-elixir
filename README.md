@@ -63,7 +63,7 @@ end
 defp size_in_kb(term), do: :erts_debug.size(term) * :erlang.system_info(:wordsize) / 1024
 ```
 
-This produced the following on my machine (underscores added for clarity):
+This produced the following on my machine:
 
 ```
 MapSet took 62728 milliseconds and is 2947.375 kb
