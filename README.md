@@ -12,15 +12,21 @@ Documentation: http://hexdocs.pm/nat_set.
 
 ## Usage
 
-Add this library to your list of dependencies in `mix.exs`:
+1. Add `nat_set` to your list of dependencies in `mix.exs`:
 
-``` elixir
-def deps do
-  [{:nat_set, "~> 0.0.1"}]
-end
-```
+    ``` elixir
+    def deps do
+      [{:nat_set, "~> 0.0.1"}]
+    end
+    ```
 
-Then run `mix deps.get` in your shell to fetch and compile `nat_set`.
+2. Ensure `nat_set` is started before your application:
+
+    ``` elixir
+    def application do
+      [applications: [:nat_set]]
+    end
+    ```
 
 ## Examples
 
